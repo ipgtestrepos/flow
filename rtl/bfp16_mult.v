@@ -166,38 +166,3 @@ module gMultiplier(a, b, out);
 		o_mantissa = product[14:7];
 	end
 endmodule
-
-
-module multiplication_normaliser(in_e, in_m, out_e, out_m);
-  input [7:0] in_e;
-  input [15:0] in_m;
-  output [7:0] out_e;
-  output [15:0] out_m;
-
-  wire [7:0] in_e;
-  wire [15:0] in_m;
-  reg [7:0] out_e;
-  reg [15:0] out_m;
-
-  always @ ( * ) begin
-	  if (in_m[14:9] == 6'b000001) begin
-			out_e = in_e - 5;
-			out_m = in_m << 5;
-		end else if (in_m[14:10] == 5'b00001) begin
-			out_e = in_e - 4;
-			out_m = in_m << 4;
-		end else if (in_m[14:11] == 4'b0001) begin
-			out_e = in_e - 3;
-			out_m = in_m << 3;
-		end else if (in_m[14:12] == 3'b001) begin
-			out_e = in_e - 2;
-			out_m = in_m << 2;
-		end else if (in_m[14:13] == 2'b01) begin
-			out_e = in_e - 1;
-			out_m = in_m << 1;
-		end else begin
-			out_e = in_e;
-			out_m = in_m;
-		end
-  end
-endmodule
